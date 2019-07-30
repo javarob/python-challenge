@@ -8,10 +8,11 @@ previous_date = 0
 current_profit = 0
 current_date = 0
 average_change = 0
-least_profit = 0
+least_profit = 100000000
 least_profit_date = ""
 highest_profit = 0
 highest_profit_date = ""
+profit_difference = 0
 
 budget_csv = os.path.join("./Resources", "budget_data_test.csv")
 
@@ -20,31 +21,36 @@ with open(budget_csv, newline="") as csv_file:
     header = next(csv_reader)
     # loop through file
     for row in csv_reader:
-        count_rows = count_rows + 1
+        count_rows = count_rows + 1 # get total number of records
         # print(row)
-        sum_rows = sum_rows + int(row[1])
-        current_profit = int(row[1])
+        sum_rows = sum_rows + int(row[1]) # sum total of all profits
+        current_profit = int(row[1]) 
         current_date = row[0]
-        if current_profit > highest_profit:
-            highest_profit = current_profit
-            highest_profit_date = current_date
-        if current_profit < least_profit:
-            least_profit = current_profit
-            least_profit_date = current_date
-        if count_rows > 1:
-           average_change = average_change + (current_profit - previous_profit)
+        
+        if count_rows > 1: # for first row where previous is empty
+           profit_difference = (current_profit - previous_profit)
+           if profit_difference > highest_profit: # track highest profit
+               highest_profit = profit_difference
+               highest_profit_date = current_date
+           if profit_difference < least_profit: # track least profit
+               least_profit = profit_difference
+               least_profit_date = current_date
+
+           average_change = average_change +  profit_difference # add profit changes - average @ report
            previous_profit = current_profit
            previous_date = current_date
-        else:
+        else: # set previous for next difference calculation
            previous_profit = current_profit
            previous_date = current_date
+           
+           
 
 
 
 print("  ")
 print("Finacial Analysis")
 print("------------------------------")
-print(f"Total Monthss: {count_rows}")
+print(f"Total Months: {count_rows}")
 print(f"Total: ${sum_rows}")
 average_change = average_change / (count_rows -1)
 print(f"Average Change: ${round(average_change, 2)}")
