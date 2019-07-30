@@ -3,15 +3,15 @@ import csv
 
 count_rows = 0
 sum_rows = 0
-previous_profit
-previous_date
-current_profit
-current_date
+previous_profit = 0
+previous_date = 0
+current_profit = 0
+current_date = 0
 average_change = 0
 greatest_increase = 0
 greatest_decrease = 0
 
-budget_csv = os.path.join("./Resources", "budget_data.csv")
+budget_csv = os.path.join("./Resources", "budget_data_test.csv")
 
 with open(budget_csv, newline="") as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=",")
@@ -19,6 +19,7 @@ with open(budget_csv, newline="") as csv_file:
     # loop through file
     for row in csv_reader:
         count_rows = count_rows + 1
+        print(row)
         sum_rows = sum_rows + int(row[1])
         current_profit = int(row[1])
         current_date = row[0]
@@ -29,13 +30,15 @@ with open(budget_csv, newline="") as csv_file:
         else:
            previous_profit = current_profit
            previous_date = current_date
-            
 
-print("Financial Analysis")
+
+
+print("  ")
+print("Finasncial Analysis")
 print("------------------------------")
-print(f"Total Months: {count_rows}")
+print(f"Total Monthss: {count_rows}")
 print(f"Total: ${sum_rows}")
-average_change = average_change / total_months
-print(f"Average Change: ${average_change}")
+average_change = average_change / (count_rows -1)
+print(f"Average Change: ${round(average_change, 2)}")
 
   
