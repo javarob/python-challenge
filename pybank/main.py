@@ -14,12 +14,12 @@ highest_profit = 0
 highest_profit_date = ""
 profit_difference = 0
 
-budget_csv = os.path.join("./Resources", "budget_data_test.csv")
+budget_csv = os.path.join("./Resources", "budget_data.csv")
 
 with open(budget_csv, newline="") as csv_file:
     csv_reader = csv.reader(csv_file, delimiter=",")
     header = next(csv_reader)
-    # loop through file
+    # loop through file by line
     for row in csv_reader:
         count_rows = count_rows + 1 # get total number of records
         # print(row)
@@ -43,18 +43,13 @@ with open(budget_csv, newline="") as csv_file:
            previous_profit = current_profit
            previous_date = current_date
            
-           
-
-
 
 print("  ")
 print("Finacial Analysis")
 print("------------------------------")
 print(f"Total Months: {count_rows}")
 print(f"Total: ${sum_rows}")
-average_change = average_change / (count_rows -1)
+average_change = average_change / (count_rows -1) #calc average change
 print(f"Average Change: ${round(average_change, 2)}")
 print(f"Greatist Increase in Profits: {highest_profit_date}  (${highest_profit})")
 print(f"Greatist Decrease in Profits: {least_profit_date}  (${least_profit})")
-
-  
