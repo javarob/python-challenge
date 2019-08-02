@@ -20,23 +20,16 @@ with open(budget_csv, newline="") as csv_file:
         vote_total = vote_total + 1 # get total number of records
         
         candidate = row[2]
-        for x in range(len(candidates)):
-            if candidate == candidates[x]:
+        for x in range(len(votes_by_candidate)):
+            if candidate in votes_by_candidate:
                 exists = True
-                vcount = vcount + 1
                 votes_by_candidate[candidate] = votes_by_candidate[candidate] + 1
-                #print(f"votes: {votes_by_candidate[candidate]}")
                 break
             else:
                 exists = False
 
         if exists == False:
-            candidates.append(candidate)
-            vcount = vcount + 1
             votes_by_candidate[candidate] = 1
-
-    # for candidate in candidates:
-    #     print(candidate)
 
 for key,val in votes_by_candidate.items():
     total_val = total_val + val
