@@ -30,27 +30,15 @@ with open(budget_csv, newline="") as csv_file:
         if exists == False:  # key wasn't in dict so add & add vote cnt too
             votes_by_candidate[candidate] = 1
 
+print("  ")
+print("Election Results")
+print("------------------------------")
+print(f"Total Votes: {vote_total}")
+print("------------------------------")
 for key,val in votes_by_candidate.items(): # list candidates and votes
     if val > prior: # find highest votes
         prior = val
         winner = key
-    print (f"{key}:  {round(val/vote_total*100, 3)} ({val}) ")
-
-# print("  ")
-# print(find_candidates)
-print(f"row count: {vote_total}")
+    print (f"{key}:  {round(val/vote_total*100, 3)}% ({val}) ")
+print("------------------------------")
 print(f"Winner: {winner}")
-
-        
-
-           
-
-# 
-# print("Finacial Analysis")
-# print("------------------------------")
-# print(f"Total Months: {count_rows}")
-# print(f"Total: ${sum_rows}")
-# average_change = average_change / (count_rows -1) #calc average change
-# print(f"Average Change: ${round(average_change, 2)}")
-# print(f"Greatist Increase in Profits: {highest_profit_date}  (${highest_profit})")
-# print(f"Greatist Decrease in Profits: {least_profit_date}  (${least_profit})")
