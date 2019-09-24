@@ -30,6 +30,7 @@ with open(budget_csv, newline="") as csv_file:
         if exists == False:  # key wasn't in dict so add & add vote cnt too
             votes_by_candidate[candidate] = 1
 
+
 print("  ")
 print("Election Results")
 print("------------------------------")
@@ -39,7 +40,7 @@ for key,val in votes_by_candidate.items(): # list candidates and votes
     if val > prior: # find highest votes
         prior = val
         winner = key
-    print (f"{key}:  {round(val/vote_total*100, 3)}% ({val}) ")
+    print (f"{key}:  {round(val/vote_total*100,3)}% ({val}) ")
 print("------------------------------")
 print(f"Winner: {winner}")
 print("------------------------------")
